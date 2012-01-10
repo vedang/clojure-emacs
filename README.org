@@ -5,3 +5,7 @@ This repository contains all the third party code required to make Emacs an awes
 ** Get the submodule code:
    - git submodule init
    - git submodule update
+
+* Caveats
+** caveat emptor:
+clojure-mode-config.el is additional configuration for my personal benefit. It might not work as-is for you.
