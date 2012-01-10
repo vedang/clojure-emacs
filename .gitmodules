@@ -1,0 +1,9 @@
+[submodule "ac-slime"]
+	path = ac-slime
+	url = https://github.com/purcell/ac-slime.git
+[submodule "slime"]
+	path = slime
+	url = https://github.com/technomancy/slime.git
+[submodule "clojure-mode"]
+	path = clojure-mode
+	url = https://github.com/technomancy/clojure-mode.git
