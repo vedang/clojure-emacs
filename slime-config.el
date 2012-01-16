@@ -88,8 +88,9 @@ well in slime."
 
 
 ;;; Auto complete integration with slime
-(require 'ac-slime)
-(add-hook 'slime-mode-hook 'set-up-slime-ac)
+(progn
+  (require 'ac-slime)
+  (add-hook 'slime-mode-hook 'set-up-slime-ac))
 
 
 (provide 'slime-config)
