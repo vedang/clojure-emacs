@@ -77,6 +77,7 @@ For example -Xmx512m or -Dsun.java2d.noddraw=true"
 
 (setq swank-clojure-dim-trace-face 'swank-clojure-dim-trace-face)
 
+;;;###autoload
 (defun swank-clojure-init (file encoding)
   (concat
    (when swank-clojure-compile-p
@@ -106,6 +107,7 @@ For example -Xmx512m or -Dsun.java2d.noddraw=true"
 will be used over paths too.)"
   (mapconcat 'identity (mapcar 'expand-file-name paths) path-separator))
 
+;;;###autoload
 (defun swank-clojure-cmd ()
   "Create the command to start clojure according to current settings."
   (if (and (not swank-clojure-binary) (not swank-clojure-classpath))
@@ -129,7 +131,7 @@ will be used over paths too.)"
                 swank-clojure-classpath))
          "clojure.main")
         (let ((init-opts '()))
-          (dolist (init-file swank-clojure-init-files init-opts) 
+          (dolist (init-file swank-clojure-init-files init-opts)
             (setq init-opts (append init-opts (list "-i" init-file))))
           init-opts)
         (list "--repl"))))))
@@ -246,6 +248,7 @@ The `path' variable is bound to the project root when these functions run.")
     (slime)))
 
 
+;;;###autoload
 (defun swank-clojure-project* (path)
   "Setup classpath for a clojure project and starts a new SLIME session.
   Kills existing SLIME session, if any."
