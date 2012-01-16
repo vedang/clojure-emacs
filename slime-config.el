@@ -1,7 +1,7 @@
 ;;; slime-config.el --- Configuration for Slime and lisp modes in general.
 ;;; Author: Vedang Manerikar
 ;;; Created on: 08 Jan 2012
-;;; Time-stamp: "2012-01-16 19:48:39 vedang"
+;;; Time-stamp: "2012-01-16 21:28:59 vedang"
 ;;; Copyright (c) 2012 Vedang Manerikar <vedang.manerikar@gmail.com>
 
 ;; This file is not part of GNU Emacs.
@@ -46,7 +46,8 @@ well in slime."
 (global-set-key (kbd "C-c z") 'slime-selector)
 
 
-(setq slime-net-coding-system 'utf-8-unix)
+(setq slime-net-coding-system 'utf-8-unix
+      slime-protocol-version 'ignore)
 (slime-setup '(slime-fancy
                slime-asdf))
 
