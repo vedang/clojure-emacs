@@ -1,7 +1,7 @@
 ;;; clojure-mode-config.el --- configuration for clojure
 ;;; Author: Vedang Manerikar
 ;;; Created on: 10 Jan 2012
-;;; Time-stamp: "2012-01-10 16:30:09 vedang"
+;;; Time-stamp: "2012-01-16 21:02:09 vedang"
 ;;; Copyright (c) 2012 Vedang Manerikar <vedang.manerikar@gmail.com>
 
 ;; This file is not part of GNU Emacs.
@@ -16,17 +16,44 @@
 ;;; Code:
 
 
-;;; Some people prefer this character. "ƒ"
+;;; Some people prefer this character. "ƒ" I prefer fn
 (defun pretty-fns ()
   (font-lock-add-keywords
-   nil `(("(?\\(fn\\>\\)"
+   nil `(("(\\(fn\\)[\[[:space:]]"
           (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                    ,(make-char 'greek-iso8859-7 107))
+                                    "fn")
                     nil))))))
 
 
-(eval-after-load 'clojure-mode
-  '(pretty-fns))
+(defun pretty-reader-macros ()
+  (font-lock-add-keywords
+   nil `(("\\(#\\)("
+          (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                    "ƒ")
+                    nil))))))
+
+
+(defun pretty-sets ()
+  (font-lock-add-keywords
+   nil `(("\\(#\\){"
+          (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                    "∈")
+                    nil))))))
+
+
+(defvar clojure-coding-hook nil
+  "Hook that gets run on activation of clojure mode.")
+(add-hook 'clojure-coding-hook 'pretty-fns)
+(add-hook 'clojure-coding-hook 'pretty-reader-macros)
+(add-hook 'clojure-coding-hook 'pretty-sets)
+
+
+(defun run-clojure-coding-hook ()
+  "Enable things that are convenient across clojure buffers."
+  (paredit-mode t)
+  (run-hooks 'clojure-coding-hook))
+(add-hook 'clojure-mode-hook 'run-clojure-coding-hook)
+
 
 (eval-after-load 'clojure-mode
   '(define-clojure-indent
