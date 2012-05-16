@@ -1,7 +1,7 @@
 ;;; slime-config.el --- Configuration for Slime and lisp modes in general.
 ;;; Author: Vedang Manerikar
 ;;; Created on: 08 Jan 2012
-;;; Time-stamp: "2012-01-16 21:28:59 vedang"
+;;; Time-stamp: "2012-05-17 01:54:15 vedang"
 ;;; Copyright (c) 2012 Vedang Manerikar <vedang.manerikar@gmail.com>
 
 ;; This file is not part of GNU Emacs.
@@ -48,8 +48,9 @@ well in slime."
 
 (setq slime-net-coding-system 'utf-8-unix
       slime-protocol-version 'ignore)
-(slime-setup '(slime-fancy
-               slime-asdf))
+(slime-setup '(slime-repl
+               slime-scratch
+               slime-editing-commands))
 
 (add-hook 'lisp-mode-hook 'turn-on-slime)
 (add-hook 'lisp-mode-hook 'turn-on-paredit)
