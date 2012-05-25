@@ -1,7 +1,7 @@
 ;;; slime-config.el --- Configuration for Slime and lisp modes in general.
 ;;; Author: Vedang Manerikar
 ;;; Created on: 08 Jan 2012
-;;; Time-stamp: "2012-05-17 01:54:15 vedang"
+;;; Time-stamp: "2012-05-26 00:11:06 vedang"
 ;;; Copyright (c) 2012 Vedang Manerikar <vedang.manerikar@gmail.com>
 
 ;; This file is not part of GNU Emacs.
@@ -76,17 +76,6 @@ well in slime."
                                              read-only
                                              font-lock-face
                                              intangible))))))
-
-
-(eval-after-load "slime"
-  '(progn
-     (require 'swank-clojure)
-     (when (or swank-clojure-binary swank-clojure-classpath)
-       (add-to-list 'slime-lisp-implementations
-                    `(clojure ,(swank-clojure-cmd) :init swank-clojure-init) t))
-     (add-hook 'slime-indentation-update-hooks 'swank-clojure-update-indentation)
-     (add-hook 'slime-repl-mode-hook 'swank-clojure-slime-repl-modify-syntax t)
-     (add-hook 'clojure-mode-hook 'swank-clojure-slime-mode-hook t)))
 
 
 ;;; Auto complete integration with slime
