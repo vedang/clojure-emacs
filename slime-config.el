@@ -1,7 +1,7 @@
 ;;; slime-config.el --- Configuration for Slime and lisp modes in general.
 ;;; Author: Vedang Manerikar
 ;;; Created on: 08 Jan 2012
-;;; Time-stamp: "2012-05-26 00:11:06 vedang"
+;;; Time-stamp: "2012-05-27 13:31:35 vedang"
 ;;; Copyright (c) 2012 Vedang Manerikar <vedang.manerikar@gmail.com>
 
 ;; This file is not part of GNU Emacs.
@@ -36,6 +36,18 @@ well in slime."
                (list ?\" ;; REMOVED ?w ?_
                      (let ((matching (matching-paren delimiter)))
                        (and matching (char-syntax matching)))))))
+  (define-key slime-repl-mode-map
+    (kbd "{") 'paredit-open-curly)
+  (define-key slime-repl-mode-map
+    (kbd "}") 'paredit-close-curly)
+  (modify-syntax-entry ?\{ "(}")
+  (modify-syntax-entry ?\} "){")
+  (modify-syntax-entry ?\[ "(]")
+  (modify-syntax-entry ?\] ")[")
+  (modify-syntax-entry ?~ "'   ")
+  (modify-syntax-entry ?, "    ")
+  (modify-syntax-entry ?^ "'")
+  (modify-syntax-entry ?= "'")
   (paredit-mode t))
 
 
