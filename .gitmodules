@@ -1,3 +1,6 @@
 [submodule "lib/paredit"]
 	path = lib/paredit
 	url = git://github.com/emacsmirror/paredit.git
+[submodule "lib/ac-slime"]
+	path = lib/ac-slime
+	url = https://github.com/purcell/ac-slime.git
