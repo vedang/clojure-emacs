@@ -1,7 +1,7 @@
 ;;; slime-config.el --- Configuration for Slime and lisp modes in general.
 ;;; Author: Vedang Manerikar
 ;;; Created on: 08 Jan 2012
-;;; Time-stamp: "2012-05-27 13:31:35 vedang"
+;;; Time-stamp: "2012-05-28 13:54:23 vedang"
 ;;; Copyright (c) 2012 Vedang Manerikar <vedang.manerikar@gmail.com>
 
 ;; This file is not part of GNU Emacs.
@@ -51,11 +51,13 @@ well in slime."
   (paredit-mode t))
 
 
-(def-slime-selector-method ?j
-  "Go to the most recently visited clojure-mode buffer."
-  (slime-recently-visited-buffer 'clojure-mode))
-
-(global-set-key (kbd "C-c z") 'slime-selector)
+(progn
+  (condition-case ex
+      (def-slime-selector-method ?j
+        "Go to the most recently visited clojure-mode buffer."
+        (slime-recently-visited-buffer 'clojure-mode))
+    ('error (message (format "Caught Exception: [%s]" ex))))
+  (global-set-key (kbd "C-c z") 'slime-selector))
 
 
 (setq slime-net-coding-system 'utf-8-unix
@@ -90,10 +92,49 @@ well in slime."
                                              intangible))))))
 
 
+;; Translate filenames accessed over tramp so slime works on remote machines
+;; https://groups.google.com/forum/#!msg/swank-clojure/av0vE-z54ZQ/O80OA-Vt8TsJ
+;; Hat-tip: Sidhant (http://github.com/grinnbearit/dot-emacs/)
+(defun slime-tramp-local-filename (f)
+  (interactive)
+  (if (file-remote-p f)
+      (tramp-file-name-localname
+       (tramp-dissect-file-name f))
+    f))
+
+
+(defun slime-tramp-remote-filename (f)
+  (interactive)
+  (if (file-remote-p default-directory)
+      (tramp-make-tramp-file-name
+       (tramp-file-name-method
+        (tramp-dissect-file-name default-directory))
+       (tramp-file-name-user
+        (tramp-dissect-file-name default-directory))
+       (tramp-file-name-host
+        (tramp-dissect-file-name default-directory))
+       f)
+    f))
+
+
+(defun slime-remote-file-name-hook ()
+  (interactive)
+  (setq slime-from-lisp-filename-function
+        'slime-tramp-remote-filename)
+  (setq slime-to-lisp-filename-function
+        'slime-tramp-local-filename))
+
+
+(add-hook 'slime-connected-hook 'slime-remote-file-name-hook)
+
+
 ;;; Auto complete integration with slime
-(progn
-  (require 'ac-slime)
-  (add-hook 'slime-mode-hook 'set-up-slime-ac))
+(eval-after-load "auto-complete"
+  '(progn
+     (require 'ac-slime)
+     (add-hook 'slime-mode-hook 'set-up-slime-ac)
+     (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+     (add-to-list 'ac-modes 'slime-repl-mode)))
 
 
 (provide 'slime-config)

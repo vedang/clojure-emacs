@@ -1,12 +1,15 @@
 [submodule "ac-slime"]
-	path = ac-slime
+	path = lib/ac-slime
 	url = https://github.com/purcell/ac-slime.git
     ignore = dirty
 [submodule "slime"]
-	path = slime
+	path = lib/slime
 	url = https://github.com/technomancy/slime.git
     ignore = dirty
 [submodule "clojure-mode"]
-	path = clojure-mode
+	path = lib/clojure-mode
 	url = https://github.com/technomancy/clojure-mode.git
     ignore = dirty
+[submodule "lib/paredit"]
+	path = lib/paredit
+	url = git://github.com/emacsmirror/paredit.git
