@@ -1,7 +1,7 @@
 ;;; clojure-mode-config.el --- configuration for clojure
 ;;; Author: Vedang Manerikar
 ;;; Created on: 10 Jan 2012
-;;; Time-stamp: "2012-05-28 14:43:56 vedang"
+;;; Time-stamp: "2012-05-28 20:35:53 vedang"
 ;;; Copyright (c) 2012 Vedang Manerikar <vedang.manerikar@gmail.com>
 
 ;; This file is not part of GNU Emacs.
@@ -99,6 +99,25 @@
 
 
 (add-hook 'slime-repl-mode-hook 'turn-on-clojure-font-lock-setup)
+
+
+(defun midje-test-for (namespace)
+  (let* ((namespace (clojure-underscores-for-hyphens namespace))
+         (segments (split-string namespace "\\."))
+         (test-segments (append (list "test") segments)))
+    (mapconcat 'identity test-segments "/")))
+
+
+(defun midje-jump-to-test ()
+  "Jump from implementation file to test."
+  (interactive)
+  (find-file (format "%s/%s_test.clj"
+                     (file-name-as-directory
+                      (locate-dominating-file buffer-file-name "src/"))
+                     (midje-test-for (clojure-find-ns)))))
+
+
+(define-key clojure-mode-map (kbd "C-c t") 'midje-jump-to-test)
 
 
 (provide 'clojure-mode-config)
