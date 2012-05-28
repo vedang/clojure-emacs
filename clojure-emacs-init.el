@@ -46,7 +46,7 @@
                                (or (buffer-file-name) load-file-name)))
 
 (require 'slime-autoloads)
-(require 'clojure-mode-autoloads)
+(require 'clojure-mode)
 
 (eval-after-load 'clojure-mode
   '(progn
