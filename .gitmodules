@@ -4,3 +4,8 @@
 [submodule "lib/ac-slime"]
 	path = lib/ac-slime
 	url = https://github.com/purcell/ac-slime.git
+    ignore=dirty
+[submodule "lib/slime"]
+	path = lib/slime
+	url = https://github.com/technomancy/slime.git
+    ignore=dirty
