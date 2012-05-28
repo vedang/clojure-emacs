@@ -9,3 +9,7 @@
 	path = lib/slime
 	url = https://github.com/technomancy/slime.git
     ignore=dirty
+[submodule "lib/clojure-mode"]
+	path = lib/clojure-mode
+	url = https://github.com/technomancy/clojure-mode.git
+    ignore=dirty
