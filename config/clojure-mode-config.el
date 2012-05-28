@@ -1,7 +1,7 @@
 ;;; clojure-mode-config.el --- configuration for clojure
 ;;; Author: Vedang Manerikar
 ;;; Created on: 10 Jan 2012
-;;; Time-stamp: "2012-05-28 13:38:22 vedang"
+;;; Time-stamp: "2012-05-28 14:43:56 vedang"
 ;;; Copyright (c) 2012 Vedang Manerikar <vedang.manerikar@gmail.com>
 
 ;; This file is not part of GNU Emacs.
@@ -43,7 +43,6 @@
                     nil))))))
 
 
-;;;###autoload
 (progn
   (defun turn-on-paredit-clojure ()
     (require 'paredit)
