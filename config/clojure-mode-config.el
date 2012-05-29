@@ -1,7 +1,7 @@
 ;;; clojure-mode-config.el --- configuration for clojure
 ;;; Author: Vedang Manerikar
 ;;; Created on: 10 Jan 2012
-;;; Time-stamp: "2012-05-28 20:35:53 vedang"
+;;; Time-stamp: "2012-05-29 14:32:07 vedang"
 ;;; Copyright (c) 2012 Vedang Manerikar <vedang.manerikar@gmail.com>
 
 ;; This file is not part of GNU Emacs.
@@ -17,7 +17,6 @@
 
 
 (defun pretty-fns ()
-  (message "pretty fns")
   (font-lock-add-keywords
    nil `(("(\\(fn\\)[\[[:space:]]"
           (0 (progn (compose-region (match-beginning 1) (match-end 1)
@@ -26,7 +25,6 @@
 
 
 (defun pretty-reader-macros ()
-  (message "pretty macros")
   (font-lock-add-keywords
    nil `(("\\(#\\)("
           (0 (progn (compose-region (match-beginning 1) (match-end 1)
@@ -35,7 +33,6 @@
 
 
 (defun pretty-sets ()
-  (message "pretty sets")
   (font-lock-add-keywords
    nil `(("\\(#\\){"
           (0 (progn (compose-region (match-beginning 1) (match-end 1)
