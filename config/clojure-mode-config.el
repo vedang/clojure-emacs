@@ -1,7 +1,7 @@
 ;;; clojure-mode-config.el --- configuration for clojure
 ;;; Author: Vedang Manerikar
 ;;; Created on: 10 Jan 2012
-;;; Time-stamp: "2012-05-29 14:32:07 vedang"
+;;; Time-stamp: "2012-06-05 15:55:15 vedang"
 ;;; Copyright (c) 2012 Vedang Manerikar <vedang.manerikar@gmail.com>
 
 ;; This file is not part of GNU Emacs.
@@ -40,14 +40,9 @@
                     nil))))))
 
 
-(progn
-  (defun turn-on-paredit-clojure ()
-    (require 'paredit)
-    (paredit-mode t))
-  (add-hook 'clojure-mode-hook 'turn-on-paredit-clojure)
-  (add-hook 'clojure-mode-hook 'pretty-fns)
-  (add-hook 'clojure-mode-hook 'pretty-sets)
-  (add-hook 'clojure-mode-hook 'pretty-reader-macros))
+(defun turn-on-paredit-clojure ()
+  (require 'paredit)
+  (paredit-mode t))
 
 
 (eval-after-load 'clojure-mode
@@ -98,6 +93,10 @@
 (add-hook 'slime-repl-mode-hook 'turn-on-clojure-font-lock-setup)
 
 
+;;; Re-implementation of clojure-test-mode functions for Midje
+;;; Hat-tip : Kapil Reddy
+;;; https://github.com/kapilreddy/dotemacs/blob/5d6cfc2215b8f1eb2dd0ca14d871478fee053db3/configurations/clojure-config.el
+
 (defun midje-test-for (namespace)
   (let* ((namespace (clojure-underscores-for-hyphens namespace))
          (segments (split-string namespace "\\."))
@@ -114,7 +113,48 @@
                      (midje-test-for (clojure-find-ns)))))
 
 
-(define-key clojure-mode-map (kbd "C-c t") 'midje-jump-to-test)
+(defun midje-implementation-for (namespace)
+  (let* ((namespace (clojure-underscores-for-hyphens namespace))
+         (segments (split-string (replace-regexp-in-string "_test" "" namespace) "\\.")))
+    (mapconcat 'identity segments "/")))
+
+
+(defun midje-jump-to-implementation ()
+  "Jump from midje test file to implementation."
+  (interactive)
+  (find-file (format "%s/src/%s.clj"
+                     (locate-dominating-file buffer-file-name "src/")
+                     (midje-implementation-for (clojure-find-package)))))
+
+
+(defun midje-jump-between-tests-and-code ()
+  (interactive)
+  (if (clojure-in-tests-p)
+      (midje-jump-to-implementation)
+    (midje-jump-to-test)))
+
+
+(defun midje-test-maybe-enable ()
+  "Stop clojure-test-mode from loading, instead use my midje functions"
+  (let ((ns (clojure-find-package)))
+    (when (and ns (string-match "test\\(\\.\\|$\\)" ns))
+      (if (memq 'clojure-test-maybe-enable 'clojure-mode-hook)
+          (remove-hook 'clojure-mode-hook 'clojure-test-maybe-enable)))))
+
+
+;;;###autoload
+(progn
+  (add-hook 'clojure-mode-hook 'turn-on-paredit-clojure)
+  (add-hook 'clojure-mode-hook 'pretty-fns)
+  (add-hook 'clojure-mode-hook 'pretty-sets)
+  (add-hook 'clojure-mode-hook 'pretty-reader-macros)
+  ;; I use Midje for writing clojure tests.
+  ;; Activating clojure-test-mode is irritating for me.
+  ;; Didn't want to change lib mode, so removing it here.
+  (add-hook 'clojure-mode-hook 'midje-test-maybe-enable)
+  (define-key clojure-mode-map
+    (kbd "C-c t")
+    'midje-jump-between-tests-and-code))
 
 
 (provide 'clojure-mode-config)
