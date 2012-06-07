@@ -57,7 +57,7 @@
 
 
 ;;; http://stackoverflow.com/questions/2474804/is-there-a-colored-repl-for-clojure
-(defun clojure-font-lock-setup ()
+(defun turn-on-clojure-font-lock-setup ()
   (interactive)
   (set (make-local-variable 'lisp-indent-function)
        'clojure-indent-function)
@@ -86,11 +86,10 @@
            . lisp-font-lock-syntactic-face-function))))
 
 
-(defun turn-on-clojure-font-lock-setup ()
-  (clojure-font-lock-setup))
+(eval-after-load "slime-config"
+  '(progn
+     (add-hook 'slime-repl-mode-hook 'turn-on-clojure-font-lock-setup)))
 
-
-(add-hook 'slime-repl-mode-hook 'turn-on-clojure-font-lock-setup)
 
 
 ;;; Re-implementation of clojure-test-mode functions for Midje
