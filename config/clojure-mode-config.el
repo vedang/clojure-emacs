@@ -1,7 +1,7 @@
 ;;; clojure-mode-config.el --- configuration for clojure
 ;;; Author: Vedang Manerikar
 ;;; Created on: 10 Jan 2012
-;;; Time-stamp: "2012-06-05 15:55:15 vedang"
+;;; Time-stamp: "2012-06-07 15:59:49 vedang"
 ;;; Copyright (c) 2012 Vedang Manerikar <vedang.manerikar@gmail.com>
 
 ;; This file is not part of GNU Emacs.
@@ -137,7 +137,8 @@
   "Stop clojure-test-mode from loading, instead use my midje functions"
   (let ((ns (clojure-find-package)))
     (when (and ns (string-match "test\\(\\.\\|$\\)" ns))
-      (if (memq 'clojure-test-maybe-enable 'clojure-mode-hook)
+      (if (and (listp clojure-mode-hook)
+               (memq 'clojure-test-maybe-enable clojure-mode-hook))
           (remove-hook 'clojure-mode-hook 'clojure-test-maybe-enable)))))
 
 
