@@ -1,7 +1,7 @@
 ;;; clojure-emacs-init.el --- Load code for a better clojure environment
 ;;; Author: Vedang Manerikar
 ;;; Created on: 27 May 2012
-;;; Time-stamp: "2012-05-28 13:34:31 vedang"
+;;; Time-stamp: "2012-06-22 00:46:54 vedang"
 ;;; Copyright (c) 2012 Vedang Manerikar <vedang.manerikar@gmail.com>
 
 ;; This file is not part of GNU Emacs.
@@ -45,10 +45,13 @@
 (vedang/add-dirs-to-load-path (file-name-directory
                                (or (buffer-file-name) load-file-name)))
 
-(require 'slime-autoloads)
-(require 'clojure-mode)
 
-(eval-after-load 'clojure-mode
+(require 'slime-autoloads)
+(autoload 'clojure-mode "clojure-mode" "Load clojure mode" t)
+(add-to-list 'auto-mode-alist '("\\.clj$" . clojure-mode))
+
+
+(eval-after-load "clojure-mode"
   '(progn
      (require 'clojure-mode-config)))
 (eval-after-load "slime"
