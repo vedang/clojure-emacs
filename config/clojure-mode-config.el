@@ -1,7 +1,7 @@
 ;;; clojure-mode-config.el --- configuration for clojure
 ;;; Author: Vedang Manerikar
 ;;; Created on: 10 Jan 2012
-;;; Time-stamp: "2012-06-07 15:59:49 vedang"
+;;; Time-stamp: "2012-07-10 22:11:34 vedang"
 ;;; Copyright (c) 2012 Vedang Manerikar <vedang.manerikar@gmail.com>
 
 ;; This file is not part of GNU Emacs.
@@ -152,9 +152,11 @@
   ;; Activating clojure-test-mode is irritating for me.
   ;; Didn't want to change lib mode, so removing it here.
   (add-hook 'clojure-mode-hook 'midje-test-maybe-enable)
-  (define-key clojure-mode-map
-    (kbd "C-c t")
-    'midje-jump-between-tests-and-code))
+  (eval-after-load "clojure-mode"
+    '(progn
+       (define-key clojure-mode-map
+         (kbd "C-c t")
+         'midje-jump-between-tests-and-code))))
 
 
 (provide 'clojure-mode-config)

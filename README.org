@@ -1,8 +1,12 @@
 * Clojure-Emacs
 
-This repository contains all the third party code required to make Emacs an awesome clojure IDE. Namely, it contains the latest versions of clojure-mode, clojure-compatible Slime, and ac-slime.
+This repository contains all the third party code required to make
+Emacs an awesome clojure IDE. Namely, it contains the latest versions
+of clojure-mode, clojure-compatible Slime, and ac-slime.
 
-I've strived to make this configuration super simple to install and use, if you face any problems please open an issue and let me know about it.
+I've strived to make this configuration super simple to install and
+use, if you face any problems please open an issue and let me know
+about it.
 
 * INSTALL
 ** Get the code:
