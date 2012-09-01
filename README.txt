@@ -1,3 +1,5 @@
+-*- mode: org; -*-
+
 * Clojure-Emacs
 
 This repository contains all the third party code required to make
@@ -12,6 +14,7 @@ about it.
 ** Get the code:
    - git clone --recursive git://github.com/vedang/clojure-emacs.git ~/.emacs.d/path/to/clojure-emacs
 ** Add the following lines to your .emacs
+
    (add-to-list 'load-path "/path/to/clojure-emacs")
    (require 'clojure-emacs-init)
 
