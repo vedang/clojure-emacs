@@ -17,3 +17,6 @@
 [submodule "lib/nrepl"]
 	path = lib/nrepl
 	url = git://github.com/kingtim/nrepl.el.git
+[submodule "lib/ac-nrepl"]
+	path = lib/ac-nrepl
+	url = git://github.com/purcell/ac-nrepl.git
