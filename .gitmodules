@@ -14,3 +14,9 @@
 	path = lib/clojure-mode
 	url = https://github.com/technomancy/clojure-mode.git
     ignore=dirty
+[submodule "lib/ac-nrepl"]
+	path = lib/ac-nrepl
+	url = git://github.com/purcell/ac-nrepl.git
+[submodule "lib/nrepl"]
+	path = lib/nrepl
+	url = git://github.com/kingtim/nrepl.el.git
