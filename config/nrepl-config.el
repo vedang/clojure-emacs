@@ -16,7 +16,7 @@
 ;;; Code:
 
 
-(add-hook 'nrepl-interaction-mode-hook 'nrepl-turn-on-eldoc-mode)
+(setq nrepl-popup-stacktraces-in-repl t)
 
 
 (defun turn-on-nrepl-paredit ()
@@ -25,7 +25,9 @@
   (paredit-mode t))
 
 
+(add-hook 'nrepl-interaction-mode-hook 'nrepl-turn-on-eldoc-mode)
 (add-hook 'nrepl-mode-hook 'turn-on-nrepl-paredit)
+(add-hook 'nrepl-mode-hook 'subword-mode)
 
 
 (eval-after-load "auto-complete"
