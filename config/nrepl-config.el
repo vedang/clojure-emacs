@@ -1,7 +1,7 @@
 ;;; nrepl-config.el --- Configuration for nRepl
 ;;; Author: Vedang Manerikar
 ;;; Created on: 05 Jan 2013
-;;; Time-stamp: "2013-01-05 21:34:54 vedang"
+;;; Time-stamp: "2013-08-02 14:47:01 vedang"
 ;;; Copyright (c) 2012 Vedang Manerikar <vedang.manerikar@gmail.com>
 
 ;; This file is not part of GNU Emacs.
@@ -36,6 +36,13 @@
      (add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
      (add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
      (add-to-list 'ac-modes 'nrepl-mode)))
+
+
+(eval-after-load "clojure-mode"
+  '(progn
+    (defun fix-nrepl-indentation ()
+      (setq-local lisp-indent-function 'clojure-indent-function))
+    (add-hook 'nrepl-mode-hook 'fix-nrepl-indentation)))
 
 
 (provide 'nrepl-config)
