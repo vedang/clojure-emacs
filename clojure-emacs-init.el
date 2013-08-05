@@ -1,7 +1,7 @@
 ;;; clojure-emacs-init.el --- Load code for a better clojure environment
 ;;; Author: Vedang Manerikar
 ;;; Created on: 27 May 2012
-;;; Time-stamp: "2013-01-06 09:21:57 vedang"
+;;; Time-stamp: "2013-08-05 15:26:53 vedang"
 ;;; Copyright (c) 2012 Vedang Manerikar <vedang.manerikar@gmail.com>
 
 ;; This file is not part of GNU Emacs.
@@ -40,6 +40,12 @@
   "Add all directories under the input directory to the emacs load path"
   (dolist (dirname (vedang/list-dirs-recursively directory))
     (add-to-list 'load-path dirname)))
+
+
+(if (boundp '*tempfiles-dir*)
+    nil
+  (let* ((*tempfiles-dir* "./temp-files/"))
+    (make-directory *tempfiles-dir* t)))
 
 
 (vedang/add-dirs-to-load-path (file-name-directory
