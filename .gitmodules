@@ -15,3 +15,6 @@
 [submodule "lib/nrepl-decompile"]
 	path = lib/nrepl-decompile
 	url = https://github.com/clojure-emacs/nrepl-decompile.git
+[submodule "lib/javap-mode"]
+	path = lib/javap-mode
+	url = https://github.com/hiredman/javap-mode.git
