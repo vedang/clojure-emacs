@@ -1,7 +1,7 @@
 ;;; nrepl-config.el --- Configuration for nRepl
 ;;; Author: Vedang Manerikar
 ;;; Created on: 05 Jan 2013
-;;; Time-stamp: "2013-08-05 15:27:16 vedang"
+;;; Time-stamp: "2013-08-15 00:41:19 vedang"
 ;;; Copyright (c) 2012 Vedang Manerikar <vedang.manerikar@gmail.com>
 
 ;; This file is not part of GNU Emacs.
@@ -49,4 +49,5 @@
 (global-set-key (kbd "C-c z") 'nrepl-selector)
 
 
+(require 'nrepl-decompile)
 (provide 'nrepl-config)
