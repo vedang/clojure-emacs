@@ -12,3 +12,6 @@
 [submodule "lib/nrepl"]
 	path = lib/nrepl
 	url = git://github.com/kingtim/nrepl.el.git
+[submodule "lib/nrepl-decompile"]
+	path = lib/nrepl-decompile
+	url = https://github.com/clojure-emacs/nrepl-decompile.git
