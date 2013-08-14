@@ -1,7 +1,7 @@
 ;;; clojure-emacs-init.el --- Load code for a better clojure environment
 ;;; Author: Vedang Manerikar
 ;;; Created on: 27 May 2012
-;;; Time-stamp: "2013-08-05 15:26:53 vedang"
+;;; Time-stamp: "2013-08-15 01:18:13 vedang"
 ;;; Copyright (c) 2012 Vedang Manerikar <vedang.manerikar@gmail.com>
 
 ;; This file is not part of GNU Emacs.
@@ -42,14 +42,15 @@
     (add-to-list 'load-path dirname)))
 
 
-(if (boundp '*tempfiles-dir*)
-    nil
-  (let* ((*tempfiles-dir* "./temp-files/"))
-    (make-directory *tempfiles-dir* t)))
+(defvar current-dirname (file-name-directory
+                         (or load-file-name (buffer-file-name)))
+  "The directory where clojure-emacs resides")
+(defvar tempfiles-dirname (concat current-dirname "temp-files/")
+  "Directory to store temporary files")
+(make-directory tempfiles-dirname t)
 
 
-(vedang/add-dirs-to-load-path (file-name-directory
-                               (or (buffer-file-name) load-file-name)))
+(vedang/add-dirs-to-load-path current-dirname)
 
 
 (require 'nrepl-autoloads)
