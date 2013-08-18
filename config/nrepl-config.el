@@ -1,7 +1,7 @@
 ;;; nrepl-config.el --- Configuration for nRepl
 ;;; Author: Vedang Manerikar
 ;;; Created on: 05 Jan 2013
-;;; Time-stamp: "2013-08-15 01:21:04 vedang"
+;;; Time-stamp: "2013-08-18 21:17:30 vedang"
 ;;; Copyright (c) 2012 Vedang Manerikar <vedang.manerikar@gmail.com>
 
 ;; This file is not part of GNU Emacs.
@@ -17,7 +17,9 @@
 
 
 (setq nrepl-popup-stacktraces-in-repl t
-      nrepl-history-file (concat tempfiles-dirname "nrepl-history.txt"))
+      nrepl-history-file (concat tempfiles-dirname "nrepl-history.txt")
+      nrepl-buffer-name-separator "-"
+      nrepl-buffer-name-show-port t)
 
 
 (defun turn-on-nrepl-paredit ()
