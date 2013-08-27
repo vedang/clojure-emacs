@@ -1,7 +1,7 @@
 ;;; nrepl-config.el --- Configuration for nRepl
 ;;; Author: Vedang Manerikar
 ;;; Created on: 05 Jan 2013
-;;; Time-stamp: "2013-08-18 21:17:30 vedang"
+;;; Time-stamp: "2013-08-27 16:03:08 vedang"
 ;;; Copyright (c) 2012 Vedang Manerikar <vedang.manerikar@gmail.com>
 
 ;; This file is not part of GNU Emacs.
@@ -36,7 +36,12 @@
 (eval-after-load "auto-complete"
   '(progn
      (require 'ac-nrepl)
-     (add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
+     (defun activate-ac-nrepl? ()
+       "ac-nrepl doesn't work well in production environments. Don't activate it
+       there."
+       (when (y-or-n-p "Activate AC-nREPL?")
+         (ac-nrepl-setup)))
+     (add-hook 'nrepl-mode-hook 'activate-ac-nrepl?)
      (add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
      (add-to-list 'ac-modes 'nrepl-mode)))
 
