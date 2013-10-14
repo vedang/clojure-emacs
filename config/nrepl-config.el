@@ -1,7 +1,7 @@
 ;;; nrepl-config.el --- Configuration for nRepl
 ;;; Author: Vedang Manerikar
 ;;; Created on: 05 Jan 2013
-;;; Time-stamp: "2013-09-12 12:09:52 vedang"
+;;; Time-stamp: "2013-10-14 14:49:11 vedang"
 ;;; Copyright (c) 2012 Vedang Manerikar <vedang.manerikar@gmail.com>
 
 ;; This file is not part of GNU Emacs.
@@ -30,8 +30,8 @@
 
 
 (add-hook 'nrepl-interaction-mode-hook 'nrepl-turn-on-eldoc-mode)
-(add-hook 'nrepl-mode-hook 'turn-on-nrepl-paredit)
-(add-hook 'nrepl-mode-hook 'subword-mode)
+(add-hook 'nrepl-repl-mode-hook 'turn-on-nrepl-paredit)
+(add-hook 'nrepl-repl-mode-hook 'subword-mode)
 
 
 (eval-after-load "auto-complete"
@@ -42,16 +42,16 @@
        there."
        (when (y-or-n-p "Activate AC-nREPL?")
          (ac-nrepl-setup)))
-     (add-hook 'nrepl-mode-hook 'activate-ac-nrepl?)
+     (add-hook 'nrepl-repl-mode-hook 'activate-ac-nrepl?)
      (add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
-     (add-to-list 'ac-modes 'nrepl-mode)))
+     (add-to-list 'ac-modes 'nrepl-repl-mode)))
 
 
 (eval-after-load "clojure-mode"
   '(progn
     (defun fix-nrepl-indentation ()
       (setq-local lisp-indent-function 'clojure-indent-function))
-    (add-hook 'nrepl-mode-hook 'fix-nrepl-indentation)))
+    (add-hook 'nrepl-repl-mode-hook 'fix-nrepl-indentation)))
 
 
 (global-set-key (kbd "C-c z") 'nrepl-selector)
